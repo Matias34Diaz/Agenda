@@ -1,0 +1,41 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondo"
+    android:padding="16dp"
+    tools:context=".View.MainActivity">
+
+    <!-- Título de bienvenida -->
+    <TextView
+        android:id="@+id/title_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome to Agenda"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/title_text_color"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="32dp" />
+
+    <!-- Botón de inicio de sesión con Google -->
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+
+    <!-- Indicador de progreso -->
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/login_button"
+        android:layout_marginTop="16dp"
+        android:visibility="gone" />
+</RelativeLayout>
+
+
+

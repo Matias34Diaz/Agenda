@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">AgendaUnsada2</string>
+    <string name="student_data">Student Data</string>
+    <string name="course_data">Course Data</string>
+    <string name="carrerPlan_data">CarrerPlan Data</string>
+    <string name="choose_career_plan">Choose your Career Plan</string>
+
+    <!-- arrays.xml -->
+    <string-array name="course_status_option">
+        <item>En curso</item>
+        <item>Regularizada</item>
+        <item>Aprobada</item>
+    </string-array>
+
+</resources>
+
+

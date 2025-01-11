@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondoregister"
+    android:padding="16dp"
+    tools:context=".View.CarrerPlanActivity">
+
+    <TextView
+        android:id="@+id/textViewCarrerPlanTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Create Student and Choose Career Plan"
+        android:textAppearance="?attr/textAppearanceHeadline5"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Student Name Input -->
+    <EditText
+        android:id="@+id/editTextStudentName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Student Name"
+        android:textColor="@android:color/white"
+        android:backgroundTint="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@id/textViewCarrerPlanTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
+
+    <!-- Student Last Name Input -->
+    <EditText
+        android:id="@+id/editTextStudentLastName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Student Last Name"
+        android:textColor="@android:color/white"
+        android:backgroundTint="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@id/editTextStudentName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
+
+    <!-- Student DNI Input -->
+    <EditText
+        android:id="@+id/editTextStudentDNI"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Student DNI"
+        android:textColor="@android:color/white"
+        android:backgroundTint="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@id/editTextStudentLastName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
+
+
+    <!-- Career Plan Spinner -->
+    <Spinner
+        android:id="@+id/spinnerCarrerPlans"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/editTextStudentDNI"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
+
+    <!-- Save and Continue Button -->
+    <Button
+        android:id="@+id/buttonSaveAndContinue"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Save and Continue"
+        android:textColor="@android:color/white"
+        android:backgroundTint="@color/button_color"
+        app:layout_constraintTop_toBottomOf="@id/spinnerCarrerPlans"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
+
