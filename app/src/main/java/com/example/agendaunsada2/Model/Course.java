@@ -6,65 +6,80 @@ import java.io.Serializable;
 
 public class Course implements Serializable {
 
-    @SerializedName("course_id")
-    private int courseId;
+    @SerializedName("id")
+    private Integer id;
 
-    @SerializedName("status_id")
-    private int statusId;
+    @SerializedName("name")
+    private String name;
 
-    @SerializedName("course_name")
-    private String courseName;
+    @SerializedName("course_code")
+    private String courseCode;
 
-    @SerializedName("status_name")
-    private String statusName;
+    @SerializedName("year")
+    private Integer year;
 
-    // Constructor predeterminado sin parámetros
-    public Course() {
+    @SerializedName("semester")
+    private Integer semester;
+
+    @SerializedName("id_department")
+    private Integer departmentId;
+
+    // Constructor completo
+    public Course(Integer id, String name, String courseCode, Integer year, Integer semester, Integer departmentId) {
+        this.id = id;
+        this.name = name;
+        this.courseCode = courseCode;
+        this.year = year;
+        this.semester = semester;
+        this.departmentId = departmentId;
     }
 
-    // Constructor con parámetros
-    public Course(int courseId, int statusId, String courseName, String statusName) {
-        this.courseId = courseId;
-        this.statusId = statusId;
-        this.courseName = courseName;
-        this.statusName = statusName;
+    // Getters y setters
+    public Integer getId() {
+        return id;
     }
 
-    // Getters y Setters
-    public int getCourseId() {
-        return courseId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public void setCourseId(int courseId) {
-        this.courseId = courseId;
+    public String getName() {
+        return name;
     }
 
-    public int getStatusId() {
-        return statusId;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setStatusId(int statusId) {
-        this.statusId = statusId;
+    public String getCourseCode() {
+        return courseCode;
     }
 
-    public String getCourseName() {
-        return courseName;
+    public void setCourseCode(String courseCode) {
+        this.courseCode = courseCode;
     }
 
-    public void setCourseName(String courseName) {
-        this.courseName = courseName;
+    public Integer getYear() {
+        return year;
     }
 
-    public String getStatusName() {
-        return statusName;
+    public void setYear(Integer year) {
+        this.year = year;
     }
 
-    public void setStatusName(String statusName) {
-        this.statusName = statusName;
+    public Integer getSemester() {
+        return semester;
     }
 
-    @Override
-    public String toString() {
-        return courseName; // Retorna el nombre del curso como representación de texto
+    public void setSemester(Integer semester) {
+        this.semester = semester;
+    }
+
+    public Integer getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(Integer departmentId) {
+        this.departmentId = departmentId;
     }
 }

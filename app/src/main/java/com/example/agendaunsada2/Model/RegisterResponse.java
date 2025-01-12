@@ -3,18 +3,23 @@ package com.example.agendaunsada2.Model;
 import com.google.gson.annotations.SerializedName;
 
 public class RegisterResponse {
-    @SerializedName("id_user")
-    private Integer idUser;
+
+    @SerializedName("id") // Identificador del usuario registrado
+    private int id;
+
+    @SerializedName("message") // Mensaje de éxito
     private String message;
+
+    @SerializedName("status") // Código de estado
     private int status;
 
-    // Getters and setters
-    public Integer getIdUser() {
-        return idUser;
+    // Getters y setters
+    public int getId() {
+        return id;
     }
 
-    public void setIdUser(Integer idUser) {
-        this.idUser = idUser;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getMessage() {
@@ -33,3 +38,4 @@ public class RegisterResponse {
         this.status = status;
     }
 }
+

@@ -1,5 +1,6 @@
 package com.example.agendaunsada2.Service;
 
+
 import com.example.agendaunsada2.Interface.CourseApi;
 import com.example.agendaunsada2.Model.Course;
 
@@ -11,8 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CourseService {
 
-    private static final String BASE_URL = "https://flamingo-crack-implicitly.ngrok-free.app/api/";
-
+    private static final String BASE_URL = "https://5446-179-42-181-209.ngrok-free.app/api/"; // Cambia según la URL actual de tu backend.
     private final CourseApi courseApi;
 
     public CourseService() {
@@ -20,37 +20,39 @@ public class CourseService {
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
+
         courseApi = retrofit.create(CourseApi.class);
     }
 
+    // Obtener todos los cursos
     public Call<List<Course>> getAllCourses() {
         return courseApi.getAllCourses();
     }
 
-    public Call<Course> getCourseById(int id) {
-        return courseApi.getCourseById(id);
+    // Obtener un curso por su ID
+    public Call<Course> getCourseById(int courseId) {
+        return courseApi.getCourseById(courseId);
     }
 
+    // Crear un nuevo curso
     public Call<Course> createCourse(Course course) {
         return courseApi.createCourse(course);
     }
 
-    public Call<Course> updateCourse(int id, Course course) {
-        return courseApi.updateCourse(id, course);
+    // Actualizar un curso por su ID
+    public Call<Course> updateCourse(int courseId, Course course) {
+        return courseApi.updateCourse(courseId, course);
     }
 
-    public Call<Course> updatePartialCourse(int id, Course course) {
-        return courseApi.updatePartialCourse(id, course);
+    // Actualización parcial de un curso
+    public Call<Course> updateCoursePartial(int courseId, Course course) {
+        return courseApi.updateCoursePartial(courseId, course);
     }
 
-    public Call<Course> updateCourseStatus(int id, String status) {
-        return courseApi.updateCourseStatus(id, status);
+    // Eliminar un curso por su ID
+    public Call<Void> deleteCourse(int courseId) {
+        return courseApi.deleteCourse(courseId);
     }
-
-    public Call<Void> deleteCourse(int id) {
-        return courseApi.deleteCourse(id);
-    }
-
 
 }
 

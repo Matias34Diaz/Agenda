@@ -15,11 +15,9 @@
         android:theme="@style/Theme.AgendaUnsada2"
         tools:targetApi="31">
         <activity
-            android:name=".View.LoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".View.RegisterActivity"
-            android:exported="false" />
+            android:name=".View.CarrerPlanActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AgendaUnsada2" />
         <activity
             android:name=".View.MainActivity"
             android:exported="true">
@@ -29,11 +27,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".View.CarrerPlanActivity" />
-        <activity android:name=".View.indexActivity" />
         <activity android:name=".View.MainMenuActivity" />
-
+        <activity android:name=".View.RegisterActivity" />
     </application>
 
 </manifest>

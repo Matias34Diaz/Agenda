@@ -2,8 +2,7 @@ package com.example.agendaunsada2.Interface;
 
 
 import com.example.agendaunsada2.Model.CarrerPlan;
-import com.example.agendaunsada2.Model.CarrerPlanWithCourses;
-import com.example.agendaunsada2.Model.Student;
+
 
 import java.util.List;
 
@@ -19,38 +18,27 @@ import retrofit2.http.Query;
 
 public interface CarrerPlanApi {
 
-    // Obtener todos los planes de carreras
+    // Obtener todos los planes de carrera
     @GET("carrerPlans")
     Call<List<CarrerPlan>> getAllCarrerPlans();
 
-    //Obtener un plan de carrera por id
-    @GET("carrerPlan/{id}")
-    Call<CarrerPlan> getCarrerPlansById(@Path("id") int id);
+    // Obtener un plan de carrera por ID
+    @GET("carrerPlans/{id}")
+    Call<CarrerPlan> getCarrerPlanById(@Path("id") int id);
 
-    // Obtener un plan de carrera y sus cursos por ID
-    @GET("carrerPlans/{id}/courses")
-    Call<CarrerPlanWithCourses> getCarrerPlanWithCourses(@Path("id") int id);
-
-    // Crear un nuevo Plan de carrera
+    // Crear un nuevo plan de carrera
     @POST("carrerPlans")
     Call<CarrerPlan> createCarrerPlan(@Body CarrerPlan carrerPlan);
 
-    // Actualizar un Plan de Carrera por ID (PUT)
+    // Actualizar un plan de carrera por ID (completo)
     @PUT("carrerPlans/{id}")
     Call<CarrerPlan> updateCarrerPlan(@Path("id") int id, @Body CarrerPlan carrerPlan);
 
-    // Actualizar parcialmente un estudiante por ID (PATCH)
-    @PATCH("carrerPlans/{id}")
+    // Actualizar parcialmente un plan de carrera por ID
+    @POST("carrerPlans/{id}")
     Call<CarrerPlan> updatePartialCarrerPlan(@Path("id") int id, @Body CarrerPlan carrerPlan);
 
-    // Eliminar plan de carrera por ID
+    // Eliminar un plan de carrera por ID
     @DELETE("carrerPlans/{id}")
     Call<Void> deleteCarrerPlan(@Path("id") int id);
-
-    @GET("carrer_plans/names")
-    Call<List<String>> getAllCarrerPlanNames();
-
-    @PATCH("students")
-    Call<Void> assignCarrerPlanToStudent(@Path("studentId") int studentId, @Query("planId") int planId);
-
 }

@@ -19,26 +19,24 @@ public interface CourseApi {
     @GET("courses")
     Call<List<Course>> getAllCourses();
 
-    // Obtener un curso por ID
+    // Obtener un curso por su ID
     @GET("courses/{id}")
-    Call<Course> getCourseById(@Path("id") int id);
+    Call<Course> getCourseById(@Path("id") int courseId);
 
-    // Crear un nuevo Curso
+    // Crear un nuevo curso
     @POST("courses")
     Call<Course> createCourse(@Body Course course);
 
-    // Actualizar un curso por ID (PUT)
+    // Actualizar un curso por su ID
     @PUT("courses/{id}")
-    Call<Course> updateCourse(@Path("id") int id, @Body Course course);
+    Call<Course> updateCourse(@Path("id") int courseId, @Body Course course);
 
-    // Actualizar parcialmente un curso por ID (PATCH)
+    // Actualización parcial de un curso por su ID
     @PATCH("courses/{id}")
-    Call<Course> updatePartialCourse(@Path("id") int id, @Body Course course);
+    Call<Course> updateCoursePartial(@Path("id") int courseId, @Body Course course);
 
-    @PATCH("courses/{id}/status")
-    Call<Course> updateCourseStatus(@Path("id") int id, @Body String status);
-
-    // Eliminar un curso por ID
+    // Eliminar un curso por su ID
     @DELETE("courses/{id}")
-    Call<Void> deleteCourse(@Path("id") int id);
+    Call<Void> deleteCourse(@Path("id") int courseId);
+
 }

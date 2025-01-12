@@ -15,6 +15,9 @@ public class User implements Serializable {
     @SerializedName("email")
     private String email;
 
+    @SerializedName("password") // Campo adicional para la contraseña
+    private String password;
+
     @SerializedName("google_id")
     private String googleId;
 
@@ -34,9 +37,11 @@ public class User implements Serializable {
         this.emailVerifiedAt = emailVerifiedAt;
     }
 
-    // Constructor para Google Login
-    public User(String googleId) {
-        this.googleId = googleId;
+    // Constructor básico
+    public User(String name, String email, String password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
     }
 
     // Getters y setters
@@ -64,6 +69,14 @@ public class User implements Serializable {
         this.email = email;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public String getGoogleId() {
         return googleId;
     }
@@ -88,3 +101,4 @@ public class User implements Serializable {
         this.emailVerifiedAt = emailVerifiedAt;
     }
 }
+

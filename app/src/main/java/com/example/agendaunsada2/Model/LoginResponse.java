@@ -4,23 +4,19 @@ import com.google.gson.annotations.SerializedName;
 
 public class LoginResponse {
 
-    @SerializedName("token") // Coincide con el campo "token" en la respuesta JSON
-    private String token;
+    @SerializedName("status") // Indica el estado de la operación ("success")
+    private String status;
 
-    @SerializedName("user") // Coincide con el campo "user" en la respuesta JSON
+    @SerializedName("user") // Información del usuario autenticado
     private User user;
 
-    // Constructor vacío
-    public LoginResponse() {
-    }
-
     // Getters y setters
-    public String getToken() {
-        return token;
+    public String getStatus() {
+        return status;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public User getUser() {
@@ -31,3 +27,4 @@ public class LoginResponse {
         this.user = user;
     }
 }
+

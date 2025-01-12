@@ -1,6 +1,8 @@
 // CourseAdapter.java
 package com.example.agendaunsada2.Adapter;
 
+
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,25 +14,29 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.agendaunsada2.Model.Course;
 import com.example.agendaunsada2.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseViewHolder> {
 
-    private List<Course> courses = new ArrayList<>();
+    private final List<Course> courses;
+
+    public CourseAdapter(List<Course> courses) {
+        this.courses = courses;
+    }
 
     @NonNull
     @Override
     public CourseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_course, parent, false);
-        return new CourseViewHolder(itemView);
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_course, parent, false);
+        return new CourseViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull CourseViewHolder holder, int position) {
-        Course currentCourse = courses.get(position);
-        holder.textViewCourseName.setText(currentCourse.getCourseName());
-        holder.textViewCourseStatus.setText(currentCourse.getStatusName()); // Mostrar el nombre del estado
+        Course course = courses.get(position);
+        holder.courseNameTextView.setText(course.getName());
+        holder.courseCodeTextView.setText(course.getCourseCode());
     }
 
     @Override
@@ -38,19 +44,14 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
         return courses.size();
     }
 
-    public void setCourses(List<Course> courses) {
-        this.courses = courses;
-        notifyDataSetChanged();
-    }
+    public static class CourseViewHolder extends RecyclerView.ViewHolder {
+        private final TextView courseNameTextView;
+        private final TextView courseCodeTextView;
 
-    static class CourseViewHolder extends RecyclerView.ViewHolder {
-        private TextView textViewCourseName;
-        private TextView textViewCourseStatus;
-
-        CourseViewHolder(View itemView) {
+        public CourseViewHolder(@NonNull View itemView) {
             super(itemView);
-            textViewCourseName = itemView.findViewById(R.id.textViewCourseName);
-            textViewCourseStatus = itemView.findViewById(R.id.textViewCourseStatus);
+            courseNameTextView = itemView.findViewById(R.id.courseNameTextView);
+            courseCodeTextView = itemView.findViewById(R.id.courseCodeTextView);
         }
     }
 }

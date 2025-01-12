@@ -4,26 +4,23 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import androidx.lifecycle.ViewModelProvider;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
+import com.example.agendaunsada2.Model.User;
 import com.example.agendaunsada2.R;
 import com.example.agendaunsada2.Viewmodel.UserViewModel;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.api.ApiException;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final int RC_SIGN_IN = 100;
-
-    private GoogleSignInClient googleSignInClient;
     private UserViewModel userViewModel;
+    private EditText emailEditText, passwordEditText;
+    private Button loginButton, registerButton;
     private ProgressBar progressBar;
 
     @Override
@@ -31,29 +28,38 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Inicializa el ViewModel
+        // Inicializar ViewModel
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
-        // Configura el ProgressBar
-        progressBar = findViewById(R.id.progress_bar);
+        // Inicializar vistas
+        emailEditText = findViewById(R.id.emailEditText);
+        passwordEditText = findViewById(R.id.passwordEditText);
+        loginButton = findViewById(R.id.loginButton);
+        registerButton = findViewById(R.id.registerButton);
+        progressBar = findViewById(R.id.progressBar);
 
-        // Configura Google Sign-In
-        configureGoogleSignIn();
-
-        // Observa los estados del ViewModel
+        // Configurar observadores
         observeViewModel();
 
-        // Configura el botón de inicio de sesión con Google
-        findViewById(R.id.login_button).setOnClickListener(v -> signInWithGoogle());
-    }
+        // Configurar botón de inicio de sesión
+        loginButton.setOnClickListener(v -> {
+            String email = emailEditText.getText().toString().trim();
+            String password = passwordEditText.getText().toString().trim();
 
-    private void configureGoogleSignIn() {
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id)) // Verifica que este ID coincide con google-services.json
-                .requestEmail()
-                .build();
+            if (!email.isEmpty() && !password.isEmpty()) {
+                User user = new User(null, null, email, null, null, null);
+                user.setPassword(password);
+                userViewModel.loginUser(user);
+            } else {
+                Toast.makeText(this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show();
+            }
+        });
 
-        googleSignInClient = GoogleSignIn.getClient(this, gso);
+        // Configurar botón de registro
+        registerButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void observeViewModel() {
@@ -64,55 +70,29 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Observa la respuesta del inicio de sesión
+        // Observa la respuesta de inicio de sesión
         userViewModel.getLoginResponse().observe(this, loginResponse -> {
-            if (loginResponse != null) {
-                Log.d("Login", "Inicio de sesión exitoso: " + loginResponse.getToken());
-                navigateToCarrerPlanActivity();
+            if (loginResponse != null && "success".equals(loginResponse.getStatus())) {
+                Log.d("Login", "Inicio de sesión exitoso para el usuario: " + loginResponse.getUser().getName());
+                Toast.makeText(this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
+                navigateToHome();
+            } else {
+                Log.e("Login", "Error: Estado no exitoso");
+                Toast.makeText(this, "Error al iniciar sesión. Verifica tus credenciales.", Toast.LENGTH_SHORT).show();
             }
         });
 
-        // Observa los errores
+        // Observa errores
         userViewModel.getErrorMessage().observe(this, errorMessage -> {
             if (errorMessage != null) {
-                Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
+                Log.e("LoginError", errorMessage);
+                Toast.makeText(this, "Error: " + errorMessage, Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    private void signInWithGoogle() {
-        Intent signInIntent = googleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, RC_SIGN_IN);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == RC_SIGN_IN) {
-            try {
-                GoogleSignInAccount account = GoogleSignIn.getSignedInAccountFromIntent(data).getResult(ApiException.class);
-
-                if (account != null) {
-                    // Obtén el token de usuario
-                    String idToken = account.getIdToken();
-                    Log.d("GoogleSignIn", "Token ID: " + idToken);
-
-                    // Envía el token al ViewModel para iniciar sesión
-                    userViewModel.loginUser(idToken);
-                } else {
-                    Log.e("GoogleSignIn", "GoogleSignInAccount es nulo.");
-                }
-
-            } catch (ApiException e) {
-                Log.e("GoogleSignIn", "Error al iniciar sesión: " + e.getMessage());
-                Toast.makeText(this, "Error al iniciar sesión con Google", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-
-    private void navigateToCarrerPlanActivity() {
-        Intent intent = new Intent(MainActivity.this, CarrerPlanActivity.class);
+    private void navigateToHome() {
+        Intent intent = new Intent(MainActivity.this, MainMenuActivity.class);
         startActivity(intent);
         finish(); // Finaliza la actividad actual
     }
